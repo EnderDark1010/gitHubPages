@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { Navbar } from "./Components/Organism/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { pages } from "./data";
+import { StartPage } from "./Components/Pages/StartPage";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/githubpages/" element={<Navbar />}>
+            <Route index element={<StartPage />} />
+            {pages.map((page) => {
+              return <Route path={page.endpoint} element={page.pagesObject} />;
+            })}
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
